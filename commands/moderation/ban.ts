@@ -3,10 +3,12 @@ import { ICommand } from "wokcommands";
 
 export default {
   category: "Testing",
-  description: "Kick an user", // Required for slash commands
+  description: "Ban an user", // Required for slash commands
 
   slash: "both", // Create both a slash and legacy command
   testOnly: true, // Only register a slash command for the testing guilds
+
+guildOnly: true,
 
   permissions: ["ADMINISTRATOR"],
 
@@ -22,20 +24,23 @@ export default {
     if (!target) {
       return "Por favor menciona a un usuario valido.";
     }
-    if (!target.kickable) {
+    if (!target.bannable ) {
       return {
         custom: true,
-        content: "No puedes kickear a este usuario.",
+        content: "No puedes banear a este usuario.",
         emphemeral: true,
       };
     }
 
     args.shift();
     const reason = args.join(" ");
-    target.kick(reason);
+    target.ban({
+        reason,
+        days: 7
+    })
 
     const embedResponse = new MessageEmbed()
-      .setTitle(`${interaction.user.username} ha kickeado a ${target.displayName}`)
+      .setTitle(`${interaction.user.username} ha baneado a ${target.displayName}`)
       .addFields({
         name: "Razón",
         value: `${reason}`,
