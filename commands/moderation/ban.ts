@@ -8,7 +8,7 @@ export default {
   slash: "both", // Create both a slash and legacy command
   testOnly: true, // Only register a slash command for the testing guilds
 
-guildOnly: true,
+  guildOnly: true,
 
   permissions: ["ADMINISTRATOR"],
 
@@ -24,7 +24,7 @@ guildOnly: true,
     if (!target) {
       return "Por favor menciona a un usuario valido.";
     }
-    if (!target.bannable ) {
+    if (!target.bannable) {
       return {
         custom: true,
         content: "No puedes banear a este usuario.",
@@ -35,12 +35,14 @@ guildOnly: true,
     args.shift();
     const reason = args.join(" ");
     target.ban({
-        reason,
-        days: 7
-    })
+      reason,
+      days: 7,
+    });
 
     const embedResponse = new MessageEmbed()
-      .setTitle(`${interaction.user.username} ha baneado a ${target.displayName}`)
+      .setTitle(
+        `${interaction.user.username} ha baneado a ${target.displayName}`
+      )
       .addFields({
         name: "Razón",
         value: `${reason}`,
