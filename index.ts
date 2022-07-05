@@ -17,6 +17,8 @@ client.on('ready', () => {
   new WOKCommands(client, {
     // The name of the local folder for your command files
     commandsDir: path.join(__dirname, 'commands'),
+    // The name of the local folder for your features files
+    featuresDir: path.join(__dirname, 'features'),
     // Allow importing of .ts files if you are using ts-node
     typeScript: true,
     // What guilds your slash commands will be created in
